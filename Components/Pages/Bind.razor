@@ -1,0 +1,36 @@
+﻿@* one way binding, oninput, update the value *@
+
+@page "/bind"
+@layout EmptyLayout
+@rendermode InteractiveServer
+
+<PageTitle>Bind</PageTitle>
+
+<h1>Bind Example</h1>
+
+<p>Value1 : @value</p>
+<p>Value2 : @values</p>
+<p style="display:inline">Value1 Input: </p>
+<input @bind="value" @bind:event="oninput" />
+<br />
+<br />
+<button @onclick="btnClk">Update Both</button>
+<button @onclick="btnClk1">Update Value 2</button>
+
+@code {
+
+    private static int value;
+    private static int values = 0;
+
+    private static void btnClk()
+    {
+        values = value;
+        value++;
+        values += 1;
+    }
+    private void btnClk1()
+    {
+        values += 1;
+    }
+}
+

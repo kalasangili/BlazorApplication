@@ -1,0 +1,22 @@
+﻿body {
+}
+
+p, label{
+/*	display:block;*/
+	font-weight: bold;
+}
+
+span{
+	font-weight: 500;
+}
+
+.section1, .section2, .section3 {
+	text-align: center;
+
+}
+.section2{
+	margin: 20px;
+}
+/*.section3{
+display:none
+}*/

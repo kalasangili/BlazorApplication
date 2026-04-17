@@ -1,0 +1,83 @@
+﻿@* Onclick, Onchange, Oninput *@
+
+@page "/EventHandling"
+@layout EmptyLayout
+@rendermode InteractiveServer
+
+<h3>EventHandling</h3>
+<br />
+
+@* onclick *@ 
+@* When user clicks something *@
+<h5 style="color:blueviolet;">Onclick EventHandling</h5>
+<h5>Calculate Count</h5>
+<p>Count : @countvalue</p>
+
+<button @onclick="IncreamentCount">Increament</button>
+<button @onclick="DecrementCount">Decrement</button>
+<br /><br />
+
+@* onchange *@
+@* after typing finished *@
+<h5 style="color:blueviolet;">OnChange EventHandling</h5>
+
+<p>Select a one number</p>
+
+<select @onchange="selectNum">
+	<option value ="first">One</option>
+	<option value ="Second">Two</option>
+	<option value="third">Three</option>
+</select>
+
+<p>the Selected Value : @number</p>
+
+@* oninput *@
+@* Fires every time user types *@
+<h5 style="color:blueviolet;">OnInput EventHandling</h5>
+
+@* Manual Oninput *@
+<p>Manual Oninput</p>
+<label>Enter the Number</label>
+<input @oninput="Typechange"/>
+<p>Input Value : @text</p>
+
+@* Using Binding *@
+<p>Using Binding</p>
+<label>Enter the Number</label>
+<input @bind="textBind" @bind:event="oninput"/>
+<p>Result : @textBind</p>
+
+@code {
+
+	private int countvalue = 0;
+	private int text ;
+	private string textBind;
+	private string number;
+	public void IncreamentCount()
+	{
+		countvalue++;
+	}
+
+	public void DecrementCount()
+	{
+		countvalue--;
+	}
+
+	public void Typechange(ChangeEventArgs e)
+	{
+		var value = e.Value.ToString();
+		if (int.TryParse(value, out int results))
+		{
+			text = results;
+		}
+		if (string.IsNullOrEmpty(value))
+		{
+			text = 0;
+		}
+	}
+
+	public void selectNum(ChangeEventArgs e)
+	{
+		number = e.Value.ToString();
+	}
+}

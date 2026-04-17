@@ -1,0 +1,72 @@
+﻿@* two way Binding, onchange, simple calculator *@
+
+@page "/TwowayBinding"
+@layout EmptyLayout
+
+@rendermode InteractiveServer
+
+<NavLink href="/"> Back</NavLink>
+<h3>TwowayBinding</h3>
+
+<h4>Calculator</h4>
+
+<label>Enter Number 1 : </label> 
+<input  @bind="num1" />
+<br />
+<br />
+
+<label>Enter Number 2 : </label>
+<input  @bind="num2" />
+<br />
+<br />
+
+<label>Select Operations : </label>
+<select @onchange="Operation">
+	<option>Select</option>
+	<option value="add">Add (+)</option>
+	<option value="sub">sub (-)</option>
+	<option value="mul">Mul (*)</option>
+	<option value="Div">Div (/)</option>
+</select>
+<br />
+<br />
+
+<p>Result: @result</p>
+
+@code {
+	private double num1;
+	private double num2;
+	private double result;
+	private string SelectedOperation = "";
+	private void Operation(ChangeEventArgs e)
+	{
+		SelectedOperation = e.Value.ToString();
+		Calculator(SelectedOperation);
+
+	}
+
+	private void Calculator(string SelectedOperation)
+	{
+		if (SelectedOperation =="add")
+		{
+			result = num1 + num2;
+		}
+
+		else if (SelectedOperation == "sub")
+		{
+			result = num1 - num2;
+		}
+
+		else if (SelectedOperation =="mul")
+		{
+			result = num1 * num2;
+		}
+
+		else if (SelectedOperation == "Div")
+		{
+			result = num1 / num2;
+		}
+
+	}
+
+}

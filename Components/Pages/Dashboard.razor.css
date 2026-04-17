@@ -1,0 +1,23 @@
+﻿body {
+}
+
+p {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.dashboard-grid {
+	display: grid;
+	/*	grid-template-rows : repeat(4, 1fr);*/
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+	border: 2px solid gray;
+	padding: 10px;
+}
+.task {
+/*	display: flex;
+	justify-content: space-between;*/
+	align-items: center;
+	padding: 5px;
+	border-bottom: 1px solid #eee;
+}

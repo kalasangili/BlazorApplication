@@ -1,0 +1,41 @@
+﻿@* Userprofile *@
+
+@page "/UserProfile"
+@layout EmptyLayout
+@rendermode InteractiveServer
+
+
+<div class="section1">
+	<h3>User Profile</h3>
+	<p>User Name: <span>@username</span></p>
+	<p>Degree: <span>@degree</span></p>
+	<p>E-mail: <span >@mail</span></p>
+	<p>City: <span>@city</span></p>
+</div>
+
+<div class="section2">
+	<button @onclick="UpdateNewProfile">@(IsVisible ? "Cancel" : "Update")</button>
+</div>
+
+<div class="section3" style="@(IsVisible ? "display:block" : "display:none")">
+	<form>
+		<label>User Name</label> <input @bind="username" /><br /><br />
+		<label>Degree</label> <input @bind="degree" /><br /><br />
+		<label>E-mail</label> <input @bind="mail" /><br /><br />
+		<label>City</label> <input @bind="city" /><br /><br />
+	</form>
+</div>
+
+@code {
+	private string username = "Kaladevi";
+	private string degree = "Engineering";
+	private string mail = "kala@gmail.com";
+	private string city = "Theni";
+
+	private bool IsVisible = false;
+
+	public void UpdateNewProfile()
+	{
+		IsVisible = !IsVisible;
+	}
+}
