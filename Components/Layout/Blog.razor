@@ -4,17 +4,19 @@
 
 <div>
 	<ul>
-		<li>Home</li>
 		<li>
-			<select>
-				<option>Blog post</option>
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-			</select>
+			<NavLink href="/Home" Match="NavLinkMatch.All">Home</NavLink>
 		</li>
-		<li>About</li>
+		<li>
+			<NavLink href="/category">Categories</NavLink>
+		</li>
+		<li>
+			<NavLink href="/search?query=blazor">Search</NavLink>
+		</li>
+		<li>
+			<NavLink href="/profile">Profile</NavLink>
+		</li>
 	</ul>
 </div>
 @Body
+

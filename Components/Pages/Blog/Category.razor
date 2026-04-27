@@ -1,0 +1,54 @@
+﻿@page "/category"
+@page "/category/{name?}"
+@layout Blog
+@rendermode InteractiveServer
+@using BlazorApp1.Components.Pages.Blog.Model
+@using BlazorApp1.Components.Pages.Blog.Services
+@inject BlogService blogService
+
+<h4>Title : @name</h4>
+<h4>Content : @(name is null ? "" : GetContentByTitle(name))</h4>
+
+<p>Title</p>
+<input @bind="titleValue" type="text" />
+<p>Content</p>
+<input type="text" @bind="contentValue" />
+<button @onclick="ClkSubmit">Submit</button>
+
+<div>
+    @foreach (var list in blogService.Blogs)
+    {
+        if (!string.IsNullOrWhiteSpace(list.titleValues))
+        {
+            <a href="category/@list.titleValues">@list.titleValues</a>
+            <br />
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string? name { get; set; }
+
+    private List<Blogdata> List = new List<Blogdata>();
+    public string? titleValue;
+    public string? contentValue;
+
+    public void ClkSubmit()
+    {
+        if (!string.IsNullOrWhiteSpace(titleValue))
+        {
+            blogService.Blogs.Add(new Blogdata
+            {
+                titleValues = titleValue,
+                contentValues = contentValue
+            });
+        }
+    }
+
+    private string? GetContentByTitle(string title)
+    {
+        var item = blogService.Blogs.FirstOrDefault(x => x.titleValues == title);
+        return item?.contentValues;
+    }
+}

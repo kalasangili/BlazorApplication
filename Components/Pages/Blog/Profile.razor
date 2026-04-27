@@ -1,0 +1,18 @@
+﻿@page "/profile/{username?}"
+@layout Blog
+
+<h3>Profile</h3>
+
+@if (string.IsNullOrEmpty(username))
+{
+    <p>Guest User</p>
+}
+else
+{
+    <p>Welcome @username</p>
+}
+
+@code {
+    [Parameter]
+    public string? username { get; set; }
+}

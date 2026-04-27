@@ -1,4 +1,5 @@
 using BlazorApp1.Components;
+using BlazorApp1.Components.Pages.Blog.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddSingleton<BlogService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

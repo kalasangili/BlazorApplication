@@ -1,0 +1,25 @@
+﻿@page "/Search"
+@layout Blog
+@inject NavigationManager nav
+
+<h3>Search</h3>
+
+<p>Query: @query</p>
+
+@code {
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? query { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? Star { get; set; }
+    protected override void OnParametersSet()
+    {
+        if (query is null)
+        {
+            query = "default";
+        }
+    }
+}
