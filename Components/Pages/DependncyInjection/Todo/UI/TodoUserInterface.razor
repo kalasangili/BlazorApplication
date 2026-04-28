@@ -1,0 +1,51 @@
+﻿@page "/Todo"
+@layout EmptyLayout
+@* @rendermode InteractiveServer *@
+@using BlazorApp1.Components.Pages.DependncyInjection.Todo.Services;
+@using BlazorApp1.Components.Pages.DependncyInjection.Todo.Model;
+@inject NavigationManager nav
+@inject ITodoService _todoService
+
+<h3>Todo App</h3>
+
+<label>TodoTask</label><br />
+<textarea @bind="task"></textarea><br />
+<button @onclick="AddTask">Submit</button>
+<div>
+	<p>Service ID: @_todoService.ServiceId</p>
+	<Table>
+		<tr>
+			<td>Task</td>
+			<td>Completion sts</td>
+			<td>Id</td>
+			<td>delete</td>
+			<td>SID</td>
+		</tr>
+		@foreach (var tasks in TaskList)
+		{
+			<tr>
+				<td> <span>@tasks.Content</span> </td>
+				<td><button>@tasks.IsComplete</button></td>
+				<td>@tasks.Id</td>
+				<td><button>Delete</button></td>
+				<td><p>Service ID: @_todoService.ServiceId</p></td>
+			</tr>
+		}
+	</Table>
+	<button @onclick="Gonext">Next</button>
+</div>
+@code {
+	private string task;
+	private List<TodoModel> TaskList = new();
+	protected void AddTask()
+	{
+		TaskList = _todoService.AddToTask(task);
+
+		task = "";
+	}
+	public void Gonext()
+	{
+		nav.NavigateTo("/navigation");
+
+	}
+}

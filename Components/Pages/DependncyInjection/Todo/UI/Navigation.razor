@@ -1,0 +1,11 @@
+﻿@page "/navigation"
+@layout EmptyLayout
+
+@using BlazorApp1.Components.Pages.DependncyInjection.Todo.Services
+@inject ITodoService _todoService
+
+<h3>navigation</h3>
+<p>Service ID: @_todoService.ServiceId</p>
+
+@code {
+}

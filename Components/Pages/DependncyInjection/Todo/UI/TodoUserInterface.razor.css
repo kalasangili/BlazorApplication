@@ -1,0 +1,6 @@
+﻿body {
+}
+table, td, tr{
+	border:2px solid black;
+	padding: 10px;
+}

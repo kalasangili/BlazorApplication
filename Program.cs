@@ -1,5 +1,7 @@
 using BlazorApp1.Components;
 using BlazorApp1.Components.Pages.Blog.Services;
+using BlazorApp1.Components.Pages.DependncyInjection.Todo.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddSingleton<BlogService>();
+
+builder.Services.AddTransient<ITodoService, TodoService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
