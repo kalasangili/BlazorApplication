@@ -6,5 +6,7 @@ namespace BlazorApp1.Components.Pages.DependncyInjection.Todo.Services
     {
 		Guid ServiceId { get; }
 		public List<TodoModel> AddToTask(string taskContent);
+
+        public List<TodoModel> Tasks { get; set; }
     }
 }

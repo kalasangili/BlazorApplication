@@ -1,0 +1,42 @@
+﻿@page "/Weather"
+@layout EmptyLayout
+@using BlazorApp1.Components.Pages.DependncyInjection.Weather.Model
+@using BlazorApp1.Components.Pages.DependncyInjection.Weather.Service
+
+@inject IWeatherService _weatherService
+<h3>Weather Application</h3>
+
+<p>@detail.Place</p>
+
+<table>
+    <tr>
+        <td>Date</td>
+        <td>TempC</td>
+        <td>TempF</td>
+        <td>Session</td>
+    </tr>
+    @foreach (var data in detail.WeatherDetails)
+    {
+        <tr>
+        
+            <td>data.Date</td>
+            <td>data.TempF</td>
+            <td>data.TempC</td>
+            <td>data.Session</td>
+   
+        </tr>
+        }
+    @* @foreach (var detail in details)
+    {
+        
+    } *@
+</table>
+@code {
+    private WeatherModel detail;
+
+    protected override void OnInitialized()
+    {
+        detail = _weatherService.WeatherData;
+    }
+
+}

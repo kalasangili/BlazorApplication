@@ -5,6 +5,7 @@
 @using BlazorApp1.Components.Pages.DependncyInjection.Todo.Model;
 @inject NavigationManager nav
 @inject ITodoService _todoService
+@* @inject TodoNavService _navService *@
 
 <h3>Todo App</h3>
 
@@ -17,18 +18,14 @@
 		<tr>
 			<td>Task</td>
 			<td>Completion sts</td>
-			<td>Id</td>
 			<td>delete</td>
-			<td>SID</td>
 		</tr>
 		@foreach (var tasks in TaskList)
 		{
 			<tr>
 				<td> <span>@tasks.Content</span> </td>
 				<td><button>@tasks.IsComplete</button></td>
-				<td>@tasks.Id</td>
 				<td><button>Delete</button></td>
-				<td><p>Service ID: @_todoService.ServiceId</p></td>
 			</tr>
 		}
 	</Table>
@@ -45,7 +42,7 @@
 	}
 	public void Gonext()
 	{
+		_todoService.Tasks = TaskList;
 		nav.NavigateTo("/navigation");
-
 	}
 }

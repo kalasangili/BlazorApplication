@@ -2,10 +2,33 @@
 @layout EmptyLayout
 
 @using BlazorApp1.Components.Pages.DependncyInjection.Todo.Services
+@using BlazorApp1.Components.Pages.DependncyInjection.Todo.Model
+@inject NavigationManager nav
 @inject ITodoService _todoService
 
 <h3>navigation</h3>
 <p>Service ID: @_todoService.ServiceId</p>
 
+<div>
+	<Table>
+		<tr>
+			<td>Task</td>
+			<td>Completion sts</td>
+			<td>delete</td>
+		</tr>
+
+		@foreach (var tasks in _todoService.Tasks)
+		{
+			<tr>
+				<td> <span>@tasks.Content</span> </td>
+				<td><button>@tasks.IsComplete</button></td>
+				<td><button>Delete</button></td>
+			</tr>
+		}
+	</Table>
+</div>
 @code {
+	private string task;
+
+	
 }

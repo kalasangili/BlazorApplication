@@ -16,5 +16,7 @@ namespace BlazorApp1.Components.Pages.DependncyInjection.Todo.Services
 			});
 			return TaskList;
 		}
+		public List<TodoModel> Tasks { get; set; } = new();
+
 	}
 }
