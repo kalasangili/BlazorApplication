@@ -11,18 +11,18 @@
 <table>
     <tr>
         <td>Date</td>
-        <td>TempC</td>
         <td>TempF</td>
+        <td>TempC</td>
         <td>Session</td>
     </tr>
-    @foreach (var data in detail.WeatherDetails)
+    @foreach (var data in detail._weatherDetails)
     {
         <tr>
         
-            <td>data.Date</td>
-            <td>data.TempF</td>
-            <td>data.TempC</td>
-            <td>data.Session</td>
+            <td>@data.Date</td>
+            <td>@data.TempF</td>
+            <td>@data.TempC</td>
+            <td>@data.Session</td>
    
         </tr>
         }

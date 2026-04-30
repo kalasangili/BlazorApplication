@@ -16,7 +16,7 @@ builder.Services.AddSingleton<BlogService>();
 builder.Services.AddTransient<ITodoService, TodoService>();
 
 //Weather -(DI)
-builder.Services.AddSingleton<IWeatherService, WeatherService>();
+builder.Services.AddScoped<IWeatherService, WeatherService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
