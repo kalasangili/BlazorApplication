@@ -1,0 +1,130 @@
+﻿@page "/formValidation"
+@layout EmptyLayout
+@using BlazorApp1.Components.Pages.FormValidation.Service
+
+@using BlazorApp1.Components.Pages.FormValidation.Model
+@inject IDataService _dataService
+@inject NavigationManager nav
+
+<h3>Form</h3>
+
+<EditForm Model="formData" OnvalidSubmit="SubmitForm" FormName="UploadForm">
+	<DataAnnotationsValidator />
+	
+	<label>FullName (Ex: JOHN A)</label>
+	<InputText placeholder="Enter your full name" @bind-Value=" formData.FullName"></InputText>
+	<ValidationMessage For="@(()=>formData.FullName)" />
+	<br /><br />
+
+	<label>Degree</label>
+	<select @bind="formData.Degree">
+		<option value="">- Select Option -</option>
+		<option value="Bachelor of Engineering">Bachelor of Engineering</option>
+		<option value="Bachelor of Technology">Bachelor of Technology</option>
+		<option value="Bachelor of Arts">Bachelor of Arts </option>
+		<option value="Bachelor of Science">Bachelor of Science</option>
+	</select>
+	<ValidationMessage For="@(()=>formData.Degree)" />
+	<br /><br />
+
+	<label>City</label>
+	<InputText placeholder="Enter your City" @bind-Value="formData.City"></InputText>
+	<ValidationMessage For="@(()=>formData.City)"/>
+	<br /><br />
+
+	<label>Skills</label><br />
+	<input type="checkbox" value="Frontend" @onchange="OnSkillChanged" /> Frontend (HTML, CSS, JS)<br />
+	<input type="checkbox" value="Backend" @onchange="OnSkillChanged" /> Backend (Python / .Net / PHP)<br />
+	<input type="checkbox" value="Database" @onchange="OnSkillChanged" /> Database (MySQL/ MongoDb/ SQLServer)<br />
+	<input type="checkbox" value="AI" @onchange="OnSkillChanged" /> AI (Pytorch, Tensorflow, OpenCV)<br />
+	<input type="checkbox" value="Cloud" @onchange="OnSkillChanged" /> Cloud (AWS/ Azure)<br />
+	<ValidationMessage For="@(() => formData.Skills)" />
+	<br />
+
+	<label>Exprience</label>
+	<InputRadioGroup TValue="string" @bind-Value="formData.Experience"><br />
+
+		<InputRadio TValue="string" Value="@("Fresher")" /> Fresher <br />
+
+		<InputRadio TValue="string" Value="@("0-2 years")" /> 0 - 2 years <br />
+
+		<InputRadio TValue="string" Value="@("2 - 5 years")" /> 2 - 5 years <br />
+
+		<InputRadio TValue="string" Value="@("Above 5 years")" /> Above 5 years
+
+	</InputRadioGroup>
+	<ValidationMessage For="@(()=>formData.Experience)"/>
+	<br /><br />
+
+	<label>CTC</label>
+	<InputNumber TValue="long?" placeholder="Enter your CTC" @bind-Value="formData.CTC"/>
+	<ValidationMessage For="@(() => formData.CTC)" />
+	<br /><br />
+
+	<label>DateOfBirth</label>
+	<InputDate TValue="DateOnly?" @bind-Value="formData.DateOfBirth"/>
+	<ValidationMessage For="@(() =>formData.DateOfBirth)" />
+	<br /><br />
+
+	<label>PhoneNumber</label>
+	<InputText placeholder="Enter your Phone Number" @bind-Value="formData.PhoneNumber"></InputText>
+	<ValidationMessage For="@(() => formData.PhoneNumber)" />
+	<br /><br />
+
+	<label>Email Address</label>
+	<InputText placeholder="Enter your Email Address" @bind-Value="formData.Email"></InputText>
+	<ValidationMessage For="@(() => formData.Email)" />
+	<br /><br />
+
+	<label>Resume</label>
+	<InputFile OnChange="OnFileSelected" accept=".pdf"></InputFile>
+	<ValidationMessage For="@(() => formData.UploadResume)" />
+	<br /><br />
+
+	<label>Signature</label>
+	<InputFile Onchange="OnImageSelected" accept=".png,.jpg,.jpeg,."></InputFile>
+	<ValidationMessage For="@(() => formData.UploadSign)" />
+	<br /><br />
+
+	<button type="submit">Submit</button>
+</EditForm>
+
+@code {
+	FormData formData = new FormData();
+
+	public void SubmitForm()
+	{
+		_dataService.SendData(formData);
+		nav.NavigateTo($"appliedPeopleList/{formData.FullName}");
+	}
+
+	public void OnFileSelected(InputFileChangeEventArgs e)
+	{
+		formData.UploadResume = e.File;
+	}
+
+	public void OnImageSelected(InputFileChangeEventArgs e)
+	{
+		formData.UploadSign = e.File;
+
+		// using var stream = formData.UploadSign.OpenReadStream(5*1024*1024);
+		// using var ms = new MemoryStream();
+
+		// stream.CopyTo(ms);
+
+		// var base64 = Convert.ToBase64String(ms.ToArray());
+
+	}
+
+	private void OnSkillChanged(ChangeEventArgs e)
+	{
+		var value = e.Value?.ToString();
+		if (formData?.Skills == null)
+			formData.Skills = new List<string>();
+
+		if (formData.Skills.Contains(value))
+			formData.Skills.Remove(value);
+		else
+			formData.Skills.Add(value);
+	}
+}

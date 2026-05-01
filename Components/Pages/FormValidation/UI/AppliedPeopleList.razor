@@ -1,0 +1,45 @@
+﻿@page "/appliedPeopleList/{name}"
+@layout EmptyLayout
+@using BlazorApp1.Components.Pages.FormValidation.Service
+
+@using BlazorApp1.Components.Pages.FormValidation.Model
+@inject IDataService _dataService
+<h3>Applied People</h3>
+
+<div>
+	<ul>
+   
+
+		@foreach (var UserData in AllDetails)
+		{
+			<li>@UserData.FullName</li>
+			<li>@UserData.Degree</li>
+			<li>@UserData.PhoneNumber</li>
+			<li>@UserData.Email</li>
+			<li>@UserData.Skills</li>
+			<li>@UserData.Experience</li>
+			<li>@UserData.CTC</li>
+			<li>@UserData.DateOfBirth</li>
+			<li>@UserData.City</li>
+			<li>@UserData.UploadResume</li>
+			@* <li>@UserData.UploadSign</li> *@
+			<img src="", width="200" />
+			
+		}
+	</ul>
+</div>
+
+@code {
+	private FormData formData = new FormData();
+	// private string  
+	List<FormData> AllDetails = new List<FormData>();
+
+	protected override void OnInitialized()
+	{
+		AllDetails = _dataService.GetData();
+	}
+	[Parameter]
+	public string? name { get; set; }
+
+	
+}

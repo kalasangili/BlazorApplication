@@ -2,6 +2,7 @@ using BlazorApp1.Components;
 using BlazorApp1.Components.Pages.Blog.Services;
 using BlazorApp1.Components.Pages.DependncyInjection.Todo.Services;
 using BlazorApp1.Components.Pages.DependncyInjection.Weather.Service;
+using BlazorApp1.Components.Pages.FormValidation.Service;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,10 @@ builder.Services.AddTransient<ITodoService, TodoService>();
 
 //Weather -(DI)
 builder.Services.AddScoped<IWeatherService, WeatherService>();
+
+//FormValidation
+builder.Services.AddScoped<IDataService,DataService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
