@@ -3,6 +3,7 @@
 
 @using BlazorApp1.Components.Pages.FormValidation.Service
 @using BlazorApp1.Components.Pages.FormValidation.Model
+@using System.Threading.Tasks
 @inject BlazorApp1.Components.Pages.FormValidation.Service.IDataService _dataService
 @inject NavigationManager nav
 
@@ -33,11 +34,13 @@
 	<br /><br />
 
 	<label>Skills</label><br />
-	<input type="checkbox" value="Frontend" @onchange="OnSkillChanged" /> Frontend (HTML, CSS, JS)<br />
-	<input type="checkbox" value="Backend" @onchange="OnSkillChanged" /> Backend (Python / .Net / PHP)<br />
-	<input type="checkbox" value="Database" @onchange="OnSkillChanged" /> Database (MySQL/ MongoDb/ SQLServer)<br />
-	<input type="checkbox" value="AI" @onchange="OnSkillChanged" /> AI (Pytorch, Tensorflow, OpenCV)<br />
-	<input type="checkbox" value="Cloud" @onchange="OnSkillChanged" /> Cloud (AWS/ Azure)<br />
+	<label>Skills</label><br />
+
+	<input type="checkbox" @onchange='(e) => OnSkillChanged(e,"Frontend")' /> Frontend<br />
+	<input type="checkbox" @onchange='(e) => OnSkillChanged(e," Backend")' /> Backend<br />
+	<input type="checkbox" @onchange='(e) => OnSkillChanged(e," Database")' /> Database<br />
+	<input type="checkbox" @onchange='(e) => OnSkillChanged(e," AI")' /> AI<br />
+	<input type="checkbox" @onchange='(e) => OnSkillChanged(e," Cloud")' /> Cloud<br />
 	<ValidationMessage For="@(() => formData.Skills)" />
 	<br />
 
@@ -90,7 +93,7 @@
 </EditForm>
 
 @code {
-		FormData formData = new FormData();
+	FormData formData = new FormData();
 
 	public void SubmitForm()
 	{
@@ -98,21 +101,36 @@
 		// nav.NavigateTo($"appliedPeopleList");
 	}
 
-	public void OnFileSelected(InputFileChangeEventArgs e)
+	public async Task OnFileSelected(InputFileChangeEventArgs e)
 	{
-		formData.UploadResume = e.File;
+		var file = e.File;
+
+		using var stream = file.OpenReadStream(10 * 1024 * 1024);
+
+		using var ms = new MemoryStream();
+
+		await stream.CopyToAsync(ms);
+
+		var base64format = Convert.ToBase64String(ms.ToArray());
+
+		formData.UploadResume = $"data:{file.ContentType};base64,{base64format}";
 	}
 
-	public void OnImageSelected(InputFileChangeEventArgs e)
+	public async Task OnImageSelected(InputFileChangeEventArgs e)
 	{
-		formData.UploadSign = e.File;
+		var file = e.File;
 
-		// using var stream = formData.UploadSign.OpenReadStream(5*1024*1024);
-		// using var ms = new MemoryStream();
+		using var stream = file.OpenReadStream(10 * 1024 * 1024);
 
-		// stream.CopyTo(ms);
+		using var ms = new MemoryStream();
 
-		// var base64 = Convert.ToBase64String(ms.ToArray());
+		await stream.CopyToAsync(ms);
+
+		var base64format = Convert.ToBase64String(ms.ToArray());
+
+		formData.UploadSign = $"data:{file.ContentType};base64,{base64format}";
+
+		
 	}
 
 
@@ -121,15 +139,21 @@
 		nav.NavigateTo("appliedPeopleList");
 	}
 
-	private void OnSkillChanged(ChangeEventArgs e)
+	private void OnSkillChanged(ChangeEventArgs e, string skill)
 	{
-		var value = e.Value?.ToString();
-		if (formData?.Skills == null)
+		bool isChecked = (bool)e.Value;
+
+		if (formData.Skills == null)
 			formData.Skills = new List<string>();
 
-		if (formData.Skills.Contains(value))
-			formData.Skills.Remove(value);
+		if (isChecked)
+		{
+			if (!formData.Skills.Contains(skill))
+				formData.Skills.Add(skill);
+		}
 		else
-			formData.Skills.Add(value);
+		{
+			formData.Skills.Remove(skill);
+		}
 	}
 }

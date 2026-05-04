@@ -35,10 +35,10 @@ namespace BlazorApp1.Components.Pages.FormValidation.Model
 		public string? Email { get; set; }
 
 		[Required]
-		public IBrowserFile? UploadResume { get; set; }
+		public string? UploadResume { get; set; }
 
 		[Required]
-		public IBrowserFile? UploadSign { get; set; }
+		public string? UploadSign { get; set; }
 
 	}
 }

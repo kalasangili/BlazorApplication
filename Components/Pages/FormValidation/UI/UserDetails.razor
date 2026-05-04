@@ -11,19 +11,20 @@
 			<li>@UserData.Degree</li>
 			<li>@UserData.PhoneNumber</li>
 			<li>@UserData.Email</li>
-			@* <li>@UserData.Skills</li>?\ *@
-			@foreach (var skill in UserData.Skills)
+			@if (UserData?.Skills != null)
 			{
-				<li>@skill</li>
-			
+				@foreach (var skill in UserData.Skills)
+				{
+					<li>@skill</li>
+				}
 			}
 
 			<li>@UserData.Experience</li>
 			<li>@UserData.CTC</li>
 			<li>@UserData.DateOfBirth</li>
 			<li>@UserData.City</li>
-			<li>@UserData.UploadResume</li>
-			<li>@UserData.UploadSign</li>
+			<img src="@UserData.UploadSign" width="400" height="400" />
+			<iframe src="@UserData.UploadResume" width="400" height="400"></iframe>
 </ul>
 
 @code {
@@ -31,9 +32,6 @@
 	public string userName { get; set; }
 	private FormData UserData;
 
-	private FormData formData = new FormData();
-	// private string
-	// List<FormData> AllDetails = new List<FormData>();
 
 	protected override void OnInitialized()
 	{
