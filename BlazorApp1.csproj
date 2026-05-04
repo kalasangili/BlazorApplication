@@ -8,7 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Components\Pages\LifeCycle\" />
+    <Compile Remove="Components\Pages\LifeCycle\**" />
+    <Content Remove="Components\Pages\LifeCycle\**" />
+    <EmbeddedResource Remove="Components\Pages\LifeCycle\**" />
+    <None Remove="Components\Pages\LifeCycle\**" />
   </ItemGroup>
 
 </Project>
