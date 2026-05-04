@@ -1,14 +1,14 @@
 ﻿@page "/formValidation"
 @layout EmptyLayout
-@using BlazorApp1.Components.Pages.FormValidation.Service
 
+@using BlazorApp1.Components.Pages.FormValidation.Service
 @using BlazorApp1.Components.Pages.FormValidation.Model
-@inject IDataService _dataService
+@inject BlazorApp1.Components.Pages.FormValidation.Service.IDataService _dataService
 @inject NavigationManager nav
 
 <h3>Form</h3>
-
-<EditForm Model="formData" OnvalidSubmit="SubmitForm" FormName="UploadForm">
+<button @onclick="ViewAllPeople">All peoples</button>
+<EditForm Model="formData" OnValidSubmit="SubmitForm" FormName="UploadForm">
 	<DataAnnotationsValidator />
 	
 	<label>FullName (Ex: JOHN A)</label>
@@ -82,7 +82,7 @@
 	<br /><br />
 
 	<label>Signature</label>
-	<InputFile Onchange="OnImageSelected" accept=".png,.jpg,.jpeg,."></InputFile>
+	<InputFile OnChange="OnImageSelected" accept=".png,.jpg,.jpeg"></InputFile>
 	<ValidationMessage For="@(() => formData.UploadSign)" />
 	<br /><br />
 
@@ -90,12 +90,12 @@
 </EditForm>
 
 @code {
-	FormData formData = new FormData();
+		FormData formData = new FormData();
 
 	public void SubmitForm()
 	{
 		_dataService.SendData(formData);
-		nav.NavigateTo($"appliedPeopleList/{formData.FullName}");
+		// nav.NavigateTo($"appliedPeopleList");
 	}
 
 	public void OnFileSelected(InputFileChangeEventArgs e)
@@ -113,7 +113,12 @@
 		// stream.CopyTo(ms);
 
 		// var base64 = Convert.ToBase64String(ms.ToArray());
+	}
 
+
+	private void ViewAllPeople()
+	{
+		nav.NavigateTo("appliedPeopleList");
 	}
 
 	private void OnSkillChanged(ChangeEventArgs e)

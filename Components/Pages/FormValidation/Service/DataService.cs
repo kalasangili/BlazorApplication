@@ -33,5 +33,18 @@ namespace BlazorApp1.Components.Pages.FormValidation.Service
 			return FormDetails;
 		}
 
-	}
+        public FormData GetDataByName(string userName)
+		{
+			foreach (var userData in FormDetails)
+			{
+				if(userData.FullName == userName)
+				{
+					return userData;
+				}
+			}
+			return null;
+		}
+		
+
+    }
 }

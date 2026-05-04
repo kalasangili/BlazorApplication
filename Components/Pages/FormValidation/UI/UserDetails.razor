@@ -1,44 +1,42 @@
-﻿@page "/appliedPeopleList"
+﻿@page "/UserDetails/{userName}"
+
 @layout EmptyLayout
 @using BlazorApp1.Components.Pages.FormValidation.Service
-
 @using BlazorApp1.Components.Pages.FormValidation.Model
 @inject IDataService _dataService
-<h3>Applied People</h3>
 
-<div>
-	<ul>
-   
-
-		@foreach (var UserData in AllDetails)
-		{
-			<li><NavLink href=@($"UserDetails/{UserData.FullName}")>@UserData.FullName</NavLink></li>
-			@* <li>@UserData.Degree</li>
+<h3>UserDetails</h3>
+<h4>@UserData.FullName</h4>
+<ul>
+			<li>@UserData.Degree</li>
 			<li>@UserData.PhoneNumber</li>
 			<li>@UserData.Email</li>
-			<li>@UserData.Skills</li>
+			@* <li>@UserData.Skills</li>?\ *@
+			@foreach (var skill in UserData.Skills)
+			{
+				<li>@skill</li>
+			
+			}
+
 			<li>@UserData.Experience</li>
 			<li>@UserData.CTC</li>
 			<li>@UserData.DateOfBirth</li>
 			<li>@UserData.City</li>
 			<li>@UserData.UploadResume</li>
-			<li>@UserData.UploadSign</li> *@
-			
-		}
-	</ul>
-</div>
+			<li>@UserData.UploadSign</li>
+</ul>
 
 @code {
+	[Parameter]
+	public string userName { get; set; }
+	private FormData UserData;
+
 	private FormData formData = new FormData();
-	// private string  
-	List<FormData> AllDetails = new List<FormData>();
+	// private string
+	// List<FormData> AllDetails = new List<FormData>();
 
 	protected override void OnInitialized()
 	{
-		AllDetails = _dataService.GetData();
+		UserData = _dataService.GetDataByName(userName);
 	}
-	[Parameter]
-	public string? name { get; set; }
-
-	
 }
