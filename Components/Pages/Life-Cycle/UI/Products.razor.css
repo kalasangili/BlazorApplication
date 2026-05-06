@@ -1,0 +1,20 @@
+﻿body {
+}
+.product {
+	border: 1px solid black;
+	width: 350px;
+	height: 400px;
+	text-align: center;
+}
+
+.ProdutContainer {
+	display: flex;
+	flex-direction: row;
+	gap:10px 10px
+}
+
+button {
+	display:block;
+	justify-self:center;
+	margin-top:10px;
+}

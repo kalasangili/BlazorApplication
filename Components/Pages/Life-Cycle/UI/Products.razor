@@ -1,0 +1,88 @@
+﻿@page "/lifeCycle/{name?}"
+@layout EmptyLayout
+@using BlazorApp1.Components.Pages.Life_Cycle.Model;
+@rendermode InteractiveServer
+@inject NavigationManager nav
+<h3>Products</h3>
+
+
+    @if (datas is null)
+    {
+        <p>Loading....</p>
+    }
+    else
+    {
+        <div class="ProdutContainer">
+            @foreach (var data in datas)
+            {   
+                <div class="product">
+                    <p>@data.ProductName</p>
+                    <img src="@data.ProductPath" width="300" height="300" alt="image"/>
+                    <button @onclick="()=> ViewProductInfo(data.ProductName)">View More</button>
+                </div>
+            }
+        </div>
+    }
+
+
+@if (selectedData is null)
+{
+    <p>loading...</p>
+}
+else
+{
+    <p>@selectedData.ProductName</p>
+    <img src="@selectedData.ProductPath" width="300" height="300" alt="image" />
+
+}
+@code {
+
+    [Parameter]
+    public string? name { get; set; }
+
+    List<ProductsData>? datas;
+    ProductsData? selectedData;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+
+        datas = new List<ProductsData>
+        {
+            new ProductsData { ProductName = "Book", ProductPath = "Images/book.jpg" },
+            new ProductsData { ProductName = "watch", ProductPath = "Images/watch.jpg" },
+            new ProductsData { ProductName = "laptop", ProductPath = "Images/laptop.jpg" },
+        };
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (datas is null)
+            return;
+
+        await Task.Delay(500);
+
+
+        foreach (var data in datas) 
+        { 
+            if (name == data.ProductName) 
+            { 
+                selectedData = data;
+                break;
+            } 
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Console.WriteLine("First render completed");
+        }
+    }
+
+    public void ViewProductInfo(string productName)
+    {
+        nav.NavigateTo($"lifeCycle/{productName}");
+    }
+}
