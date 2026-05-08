@@ -1,0 +1,18 @@
+﻿@using BlazorApp1.Components.Pages.ParentChildComponents.ParentComponents.Model
+
+
+<h3>ChildEditTaskManager</h3>
+
+<label>Id</label>
+<InputNumber @bind-Value="EditModel.Id"></InputNumber>
+
+<label>Task</label>
+<InputTextArea @bind-Value="EditModel.Task"></InputTextArea>
+
+<label>UserName</label>
+<InputText @bind-Value="EditModel.UserName"></InputText>
+
+@code {
+	[Parameter]
+	public TaskModel EditModel { get; set; }
+}

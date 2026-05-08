@@ -1,0 +1,15 @@
+﻿@using BlazorApp1.Components.Pages.ParentChildComponents.ParentComponents.Model
+
+<label>Id</label>
+<InputNumber @bind-Value="Newtask.Id"></InputNumber>
+
+<label>Task</label>
+<InputTextArea @bind-Value="Newtask.Task"></InputTextArea>
+
+<label>UserName</label>
+<InputText @bind-Value="Newtask.UserName"></InputText>
+
+@code {
+	[Parameter]
+	public TaskModel? Newtask { get; set; }
+}

@@ -1,0 +1,15 @@
+﻿@page "/parentcounter"
+@layout EmptyLayout
+@using BlazorApp1.Components.Pages.ParentChildComponents.ChildComponents.UI
+
+<ChildCounter count=@count></ChildCounter>
+<button @onclick="Increament">Increament</button>
+
+@code {
+	int count;
+
+	public void Increament()
+	{
+		count++;
+	}
+}
