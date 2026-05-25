@@ -2,14 +2,16 @@
 @using BlazorApp1.Components.Pages.ParentChildComponents.ParentComponents.Model;
 @using BlazorApp1.Components.Pages.ParentChildComponents.ChildComponents.UI;
 @layout EmptyLayout
-@rendermode InteractiveServer
+@rendermode InteractiveServer 
 
 <h3>TaskManager</h3>
 <ChildAddTaskManager Newtask=@_task></ChildAddTaskManager>
 <button @onclick="AddNewTask">Add</button>
 
+
+
 @childEditComponent
-<button @onclick="UpdateNewTask">Update</button>
+ <button @onclick="UpdateNewTask">Update</button>
 
 
 <table>
@@ -65,8 +67,6 @@
 
 	public void UpdateNewTask()
 	{
-		Id = _task.Id,
-		Task = _task.Task,
-		UserName = _task.UserName,
+		
 	}
 }

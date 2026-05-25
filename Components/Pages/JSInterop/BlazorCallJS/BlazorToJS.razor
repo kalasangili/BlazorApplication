@@ -1,0 +1,37 @@
+﻿@page "/ShowAlert"
+@layout EmptyLayout
+@inject IJSRuntime JSRuntime
+
+<h3>ShowAlert</h3>
+
+<button @onclick="ShowAlertMessage">Alert</button>
+<button @onclick="ConfirmMessages">Confirm</button>
+
+<input @bind="num1" type="number"/>
+<input @bind="num2" type="number"/>
+
+<p>@output</p>
+
+<button @onclick="AddValue">Add</button>
+
+@code {
+
+    private int num1;
+    private int num2;
+    private string output;
+    private async Task ShowAlertMessage()
+    {
+        await JSRuntime.InvokeVoidAsync("AlertMessageShown");
+    }
+
+    private async Task ConfirmMessages()
+    {
+        await JSRuntime.InvokeVoidAsync("ConfirmMessage", "Do you Confirm this Message");
+    }
+
+    private async Task AddValue()
+    {
+        var result = await JSRuntime.InvokeAsync<int>("AddTwoNumber", num1, num2);
+        output = result.ToString();
+    }
+}
