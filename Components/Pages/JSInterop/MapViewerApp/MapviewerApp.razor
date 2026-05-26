@@ -1,10 +1,19 @@
-﻿@page "/MapviewerApp"
+﻿@page "/MapViewerApp"
 
-@inject IJSRuntime JSRuntime
+@inject IJSRuntime JS
 
 
-<h3>MapviewerApp</h3>
+<button @onclick="LoadMap">
+    Load Map
+</button>
+<div id="map" style="height:500px;"></div>
+
 
 @code {
+
+    async Task LoadMap()
+    {
+        await JS.InvokeVoidAsync("loadMap");
+    }
 
 }
