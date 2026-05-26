@@ -1,9 +1,46 @@
 ﻿@page "/jstoblazor"
 @layout EmptyLayout
 
-<h3>JSToBlazor</h3>
+@inject IJSRuntime JsRuntime
 
+<h3>JSToBlazor</h3>
+<button onclick="AlertClickJSMethod()">Alert</button><br />
+
+<button onclick="AddJs(3,3)">Add</button>
+
+<button onclick="InstanceMethodforAlert()">Alert</button>
 
 @code {
+
+    DotNetObjectReference<JSToBlazor>? objectReference;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objectReference = DotNetObjectReference.Create(this);
+            await JsRuntime.InvokeVoidAsync("SetRef", objectReference);
+
+        }
+    }
+
+    [JSInvokable]
+    public static Task<string> AlertMethod()   
+    {
+        return Task.FromResult("Alert from JavaScript to Blazor");
+    }
+
+    [JSInvokable]
+    public static Task<int> AddCsharp(int a, int b)
+    {
+        return Task.FromResult(a + b);
+    }
+
+    [JSInvokable]
+    public Task<string> AlertInstance()
+    {
+        return Task.FromResult("This is an Alert Message from the Instance Method");
+    }
+
 
 }
