@@ -5,68 +5,75 @@
 @rendermode InteractiveServer
 
 <h3>TaskManager</h3>
-<ChildAddTaskManager Newtask=@_task></ChildAddTaskManager>
-<button @onclick="AddNewTask">Add</button>
+
+@if (childEditComponent == null)
+{
+    <ChildAddTaskManager Newtask=@_task></ChildAddTaskManager>
+    <button @onclick="AddNewTask">Add</button>
+}
 
 @childEditComponent
-<button @onclick="UpdateNewTask">Update</button>
-
+@if (childEditComponent != null && selectedTask != null)
+{
+    <button @onclick="() => UpdateNewTask(selectedTask.Id)">Update</button>
+}
 
 <table>
-    <tr>
-        <td>Id</td>
-		<td>Name</td>
-		<td>Task</td>
-		<td>Edit</td>
+    <tr style="border-bottom:1px black solid"> 
+        @* <td>Id</td> *@
+        <td style="padding:20px">Task</td>
+        <td style="padding:20px">Priority</td>
+        <td style="padding:20px" >Status</td>
+        <td style="padding:20px">Edit</td>
     </tr>
-	@if (Tasks is not null)
-	{
-		@foreach (var task in Tasks)
-		{
-			<tr>
-				<td>@task.Id</td>
-				<td>@task.UserName</td>
-				<td>@task.Task</td>
-				<td><button @onclick="()=> EditTask(task.Id)">Edit</button></td>
-			</tr>
-		}
-	}
+    @if (Tasks is not null)
+    {
+        @foreach (var task in Tasks)
+        {
+            <tr>
+                @* <td>@task.Id</td> *@
+                <td style="padding:20px">@task.Task</td>
+                <td style="padding:20px">@task.Priority</td>
+                <td style="padding:20px">@task.Status</td>
+                <td style="padding:20px"><button @onclick="() => EditTask(task.Id)">Edit</button></td>
+            </tr>
+        }
+    }
 </table>
 
-
 @code {
-	TaskModel _task = new TaskModel();
-	List<TaskModel> Tasks = new List<TaskModel>();
+    TaskModel _task = new TaskModel();
+    List<TaskModel> Tasks = new List<TaskModel>();
 
-	private RenderFragment childEditComponent;
+    private RenderFragment? childEditComponent;
+    private TaskModel? selectedTask;
 
-	public void AddNewTask()
-	{
-		Tasks.Add
-		(
-			new TaskModel
-			{
-				Id = _task.Id,
-				Task = _task.Task,
-				UserName = _task.UserName,
-			}	
-		);
-	}
+    public void AddNewTask()
+    {
+        Tasks.Add(new TaskModel
+        {
+            Id = Guid.NewGuid(),
+            Task = _task.Task,
+            Priority = _task.Priority,
+            Status = _task.Status,
 
-	public void EditTask(int? Id)
-	{
-		childEditComponent = builder =>
-		{
-			builder.OpenComponent(0, typeof(ChildEditTaskManager));
-			builder.AddAttribute(1, "EditModel", _task);
-			builder.CloseComponent();
-		};
-	}
+        });
+    }
+
+    public void EditTask(Guid? Id)
+    {
+        selectedTask = Tasks.FirstOrDefault(x => x.Id == Id);
+
+        childEditComponent = builder =>
+        {
+            builder.OpenComponent(0, typeof(ChildEditTaskManager));
+            builder.AddAttribute(1, "EditModel", selectedTask);
+            builder.CloseComponent();
+        };
+    }
 
 	public void UpdateNewTask()
 	{
-		Id = _task.Id,
-		Task = _task.Task,
-		UserName = _task.UserName,
+		
 	}
 }

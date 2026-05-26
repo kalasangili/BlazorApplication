@@ -1,16 +1,38 @@
 ﻿@using BlazorApp1.Components.Pages.ParentChildComponents.ParentComponents.Model
 
 
-<h3>ChildEditTaskManager</h3>
-
-<label>Id</label>
-<InputNumber @bind-Value="EditModel.Id"></InputNumber>
+@* <label>Id</label>
+<InputNumber @bind-Value="EditModel.Id"></InputNumber> *@
 
 <label>Task</label>
+<br />
 <InputTextArea @bind-Value="EditModel.Task"></InputTextArea>
+<br />
+<br />
 
-<label>UserName</label>
-<InputText @bind-Value="EditModel.UserName"></InputText>
+<label>Priority</label>
+<br />
+<select @bind="EditModel.Priority">
+	<option></option>
+	<option value="low">low</option>
+	<option value="medium">medium</option>
+	<option value="high">high</option>
+</select>
+<br />
+<br />
+
+<label>Status</label>
+<br />
+<InputRadioGroup TValue="string" @bind-Value="EditModel.Status">
+	<InputRadio TValue="string" Value=@("Todo") />Todo
+	<br />
+	<InputRadio TValue="string" Value=@("Process") />Process
+	<br />
+	<InputRadio TValue="string" Value=@("Completed") />Completed
+	<br />
+</InputRadioGroup>
+<br />
+<br />
 
 @code {
 	[Parameter]
