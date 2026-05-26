@@ -14,4 +14,8 @@
     <None Remove="Components\Pages\LifeCycle\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\Pages\StateManagement\Service\" />
+  </ItemGroup>
+
 </Project>
