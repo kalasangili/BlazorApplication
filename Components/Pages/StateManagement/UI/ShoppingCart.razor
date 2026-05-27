@@ -1,7 +1,89 @@
 ﻿@page "/shoppingcart"
+@layout EmptyLayout
+@using BlazorApp1.Components.Pages.StateManagement.Model
 
 <h3>ShoppingCart</h3>
 
-@code {
+<ul>
+    @foreach (var cart in CartList)
+    {
+            <li>
+                <div>@cart.productName</div>
+                <div><img src="@cart.Path" width="200px" height="200px" /></div>
+                <div>@cart.Price</div>
+                <div><button @onclick="@(() => AddtoCart(cart))">Add</button></div>
+            </li>
+    }
+    </ul>
 
+@if(SelectedProduct != null)
+{
+    <p>Selected Products</p>
+
+    <ul>
+        @foreach (var product in SelectedProduct)
+        {
+            @* <li>
+                <div>@product.productName</div>
+                <div><img src="@product.Path" width="200px" height="200px" /></div>
+                <div>@product.Price</div>
+                <div><button @onclick="@(() => DeleteFromCart(product))">Delete</button></div>
+            </li> *@
+            <OrderedProducts SelectedProduct="product" DeleteFromCartParentMethod="@(() => DeleteFromCart(product))"></OrderedProducts>
+
+        }
+    </ul>
+    
+    
+    @* <OrderedProducts SelectedProduct="SelectedProduct" DeleteFromCartParentMethod="DeleteFromCart(CartModel product)"></OrderedProducts> *@
+    <div>TotalAmount = @TotalAmount</div>
+
+}
+
+@code {
+    List<CartModel> CartList;
+
+    List<CartModel> SelectedProduct = new List<CartModel>();
+
+    float TotalAmount = 0;
+
+    protected override void OnInitialized()
+    {
+        CartList = new List<CartModel>
+        {
+            new CartModel
+            {
+                productName = "Laptop",
+                Path = "Images/laptop.jpg",
+                Price = 100000,
+            },
+             new CartModel
+            {
+                productName = "bag",
+                Path = "Images/bag.jpg",
+                Price = 1000,
+            },
+             new CartModel
+            {
+                productName = "wallet",
+                Path = "Images/wallet.jpg",
+                Price = 10000,
+            }
+        };
+        base.OnInitialized();
+    }
+
+    public void AddtoCart(CartModel cart)
+    {
+        SelectedProduct.Add(cart);
+
+        TotalAmount += cart.Price;
+    }
+
+    public void DeleteFromCart(CartModel product)
+    {
+        SelectedProduct.Remove(product);
+
+        TotalAmount -= product.Price;
+    }
 }

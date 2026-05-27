@@ -1,0 +1,24 @@
+﻿@using BlazorApp1.Components.Pages.StateManagement.Model
+
+
+        <li>
+            <div>@SelectedProduct.productName</div>
+            <div><img src="@SelectedProduct.Path" width="200px" height="200px" /></div>
+            <div>@SelectedProduct.Price</div>
+            <div><button @onclick="@(() => DeleteFromCart(SelectedProduct))">Delete</button></div>
+        </li>
+
+@* <div>TotalAmount = @TotalAmount</div> *@
+
+@code {
+    [Parameter]
+    public CartModel SelectedProduct { get; set; }
+
+    [Parameter]
+    public EventCallback<CartModel> DeleteFromCartParentMethod { get; set; }
+
+    public async Task DeleteFromCart(CartModel product)
+    {
+        await DeleteFromCartParentMethod.InvokeAsync();
+    }
+}
