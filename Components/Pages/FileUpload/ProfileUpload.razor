@@ -1,0 +1,33 @@
+﻿@page "/Profile"
+@layout EmptyLayout
+
+<h3>ProfileUpload</h3>
+
+@if (!string.IsNullOrEmpty(path))
+{
+    <img src="@path" style="width:175px; height:175px;" />
+
+}
+<br /><br />
+<InputFile OnChange="UpdateProfile" accept=".jpg,.png"></InputFile>
+
+
+@code {
+
+    public string path;
+
+    private async Task UpdateProfile(InputFileChangeEventArgs e)
+    {
+        var Profile = e.File;
+
+        using var stream = Profile.OpenReadStream();
+
+        using var memStream = new MemoryStream();
+
+        await stream.CopyToAsync(memStream);
+
+        var file = Convert.ToBase64String(memStream.ToArray());
+
+        path = $"data:{Profile.ContentType};base64,{file}";
+    }
+}
