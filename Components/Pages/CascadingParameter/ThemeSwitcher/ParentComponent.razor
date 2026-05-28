@@ -1,0 +1,30 @@
+﻿@page "/theme_switcher"
+@layout EmptyLayout
+
+<button @onclick="ThemeSwitcher">change theme</button>
+<br /><br />
+<CascadingValue Value="@Theme" Name="bgcolor">
+    <CascadingValue Value="@ChangeColor" Name="color">
+        <ChildComponent></ChildComponent>
+        <GrandchildComponent></GrandchildComponent>
+    </CascadingValue>
+</CascadingValue>
+@code {
+
+    public string ChangeColor { get; set; } 
+
+    public string? Theme { get; set; }
+    public void ThemeSwitcher()
+    {
+        if (Theme == null)
+        {
+            Theme = "background-color:black";
+            ChangeColor = "color:white";
+        }
+        else if (Theme == "background-color:black")
+        {
+            Theme = null ;
+            ChangeColor = null;
+        }
+    }
+}

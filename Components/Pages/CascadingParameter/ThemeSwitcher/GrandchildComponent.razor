@@ -1,0 +1,13 @@
+﻿<div style="@ChangeColor;@Theme">
+    
+    @* <p>GrandchildComponnet</p> *@
+    
+</div>
+
+@code {
+    [CascadingParameter(Name = "color")]
+    public string ChangeColor { get; set; }
+
+    [CascadingParameter(Name = "bgcolor")]
+    public string Theme { get; set; }
+}
