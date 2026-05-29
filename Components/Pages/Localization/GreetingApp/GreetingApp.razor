@@ -1,0 +1,22 @@
+﻿@page "/greetingapp"
+
+<h3>GreetApp</h3>
+
+<select @onchange="LanguageSelection">
+    <option>--Select Languages--</option>
+    <option value="Tamil">Tamil</option>
+    <option value="English">English</option>
+    <option value="Hindi">Hindi</option>
+</select>
+
+<p>@greetingMessage</p>
+
+
+@code {
+    string greetingMessage = string.Empty;
+
+    private void LanguageSelection(ChangeEventArgs e)
+    {
+        
+    }
+}
