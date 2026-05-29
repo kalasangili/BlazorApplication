@@ -1,0 +1,46 @@
+﻿@page "/ContactList"
+@layout EmptyLayout
+@using BlazorApp1.Components.Pages.Virtualization.Model
+
+<h3>ContactList</h3>
+
+
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Mail</td>
+    </tr>
+    <Virtualize Items="ContactDetailList" Context="Contact">
+        <tr>
+            <td>@Contact.Id</td>
+            <td>@Contact.Name</td>
+            <td>@Contact.Mail</td>
+        </tr>
+     </Virtualize>
+
+</table>
+
+@code {
+
+    List<ContactModel> ContactDetailList = new();
+
+    protected override void OnInitialized()
+    {
+        for (int i=1; i<=1000; i++)
+        {
+            ContactDetailList.Add
+            (
+                new ContactModel
+                {
+                    Id=i,
+                    Name =$"Contact{i}",
+                    Mail = $"Contact{i}@gmail.com"
+                }          
+            );
+
+        }
+    }
+
+
+}
