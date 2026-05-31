@@ -1,42 +1,40 @@
 using BlazorApp1.Components;
-using BlazorApp1.Components.Pages.Blog.Services;
-using BlazorApp1.Components.Pages.DependncyInjection.Todo.Services;
-using BlazorApp1.Components.Pages.DependncyInjection.Weather.Service;
-using BlazorApp1.Components.Pages.FormValidation.Service;
-using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Blog - (Routing)
-builder.Services.AddSingleton<BlogService>();
+builder.Services.AddLocalization();
 
-// Todo - (DI)
-builder.Services.AddTransient<ITodoService, TodoService>();
+string[] supportedCulture =
+[
+    "en-US",
+    "ta-IN",
+    "hi-IN"
+];
 
-//Weather -(DI)
-builder.Services.AddScoped<IWeatherService, WeatherService>();
-
-//FormValidation
-builder.Services.AddScoped<IDataService,DataService>();
+var localizationOptions =
+    new RequestLocalizationOptions()
+        .SetDefaultCulture("en-US")
+        .AddSupportedCultures(supportedCulture)
+        .AddSupportedUICultures(supportedCulture);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    app.UseHsts();
-}
-app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
+app.UseRequestLocalization(localizationOptions);
+
 app.UseHttpsRedirection();
 
 app.UseAntiforgery();
 
+app.MapControllers();
+
 app.MapStaticAssets();
+
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
