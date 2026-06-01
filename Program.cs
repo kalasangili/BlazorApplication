@@ -13,8 +13,7 @@ builder.Services.AddLocalization();
 string[] supportedCulture =
 [
     "en-US",
-    "ta-IN",
-    "hi-IN"
+    "ta-IN"
 ];
 
 var localizationOptions =
