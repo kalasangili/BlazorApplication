@@ -1,42 +1,40 @@
-﻿@page "/greetingapp"
-
+﻿@page "/greetingApp"
 @using Microsoft.Extensions.Localization
-@* @using BlazorApp1.Components.Pages.Localization.GreetingApp.Resources *@
-@using System.Globalization
+
+
 @inject NavigationManager navManager
 @inject IStringLocalizer<Shared> localizer
 
 <h3>Localization Demo</h3>
 
-<select @bind="culture">
+<button @onclick="English">
+    English
+</button>
 
-    <option value="">--Select--</option>
-    <option value="en-US">English</option>
-    <option value="ta-IN">Tamil</option>
-</select>
+<button @onclick="Tamil">
+    Tamil
+</button>
 
-@code{
 
-    protected void OnIntialized()
+<hr />
+
+<h4>@localizer["Welcome"]</h4>
+
+@code {
+
+    private void English()
     {
-        culture = CultureInfo.CurrentCulture;
+        navManager.NavigateTo(
+            "/Culture/Set?culture=en-US",
+            true);
     }
 
-    private CultureInfo culture
+    private void Tamil()
     {
-        get { return CultureInfo.CurrentCulture; }
-
-        set
-        {
-            if (CultureInfo.CurrentCulture != value)
-            {
-                var uri = new Uri(navManager.Uri).GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
-                var cultureEscaped = Uri.EscapeDataString(value.Name);
-                var uriEscaped = Uri.EscapeDataString(uri);
-
-                navManager.NavigateTo($"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}", forceLoad: true);
-            }
-        }
-
+        navManager.NavigateTo(
+            "/Culture/Set?culture=ta-IN",
+            true);
     }
+
+  
 }

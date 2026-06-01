@@ -18,4 +18,10 @@
     <Folder Include="Components\Pages\StateManagement\Service\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Components\Pages\Localization\GreetingApp\Resources\Shared.en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
