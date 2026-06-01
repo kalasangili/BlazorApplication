@@ -2,5 +2,6 @@
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
   </Folder>
+  <Project Path="../ReusableLibrary/ReusableLibrary.csproj" Id="24f849bf-1dde-43e2-bd3c-a05d9763a259" />
   <Project Path="BlazorApp1.csproj" />
 </Solution>

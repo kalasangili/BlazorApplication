@@ -1,0 +1,17 @@
+﻿@page "/ReusableLibrary"
+@layout EmptyLayout
+
+<h3>MainComponent</h3>
+
+<Component1></Component1>
+<ButtonComponent SaveMethod="childMethod"></ButtonComponent>
+
+<p>@result</p>
+@code {
+
+    string result;
+    public void childMethod(MouseEventArgs e)
+    {
+        result = "Saved Successfully";
+    }
+}

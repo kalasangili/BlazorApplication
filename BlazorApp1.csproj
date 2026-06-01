@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -12,6 +12,10 @@
     <Content Remove="Components\Pages\LifeCycle\**" />
     <EmbeddedResource Remove="Components\Pages\LifeCycle\**" />
     <None Remove="Components\Pages\LifeCycle\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ReusableLibrary\ReusableLibrary.csproj" />
   </ItemGroup>
 
 </Project>
