@@ -1,0 +1,40 @@
+﻿@page "/counter-errorhandle"
+
+<h3>Counter_error</h3>
+
+<ErrorBoundary @ref="boundary">
+
+    <ChildContent>
+
+        <Counter></Counter>
+
+    </ChildContent>
+
+    <ErrorContent>
+
+        <div class="alert alert-danger">
+            Counter failed!
+
+            <br />
+
+            Please refresh the page.
+        </div>
+        <button @onclick="retry">retry</button>
+
+    </ErrorContent>
+
+    @* <Counter></Counter> *@
+
+</ErrorBoundary>
+
+@* <button @onclick="retry">retry</button> *@
+
+@code {
+
+    private ErrorBoundary? boundary;
+
+    public void retry()
+    {
+        boundary?.Recover();
+    }
+}
