@@ -2,6 +2,7 @@
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
   </Folder>
+  <Project Path="../ProductAPI/ProductAPI.csproj" Id="9800328a-f99e-4087-af57-d71bfad879e7" />
   <Project Path="../ReusableLibrary/ReusableLibrary.csproj" Id="24f849bf-1dde-43e2-bd3c-a05d9763a259" />
   <Project Path="BlazorApp1.csproj" />
 </Solution>
