@@ -1,0 +1,83 @@
+﻿@page "/Localization"
+
+@using Microsoft.Extensions.Localization
+@using BlazorApp1.Components.Pages.Localization.Resources
+@using BlazorApp1.Components.Pages.Localization.services
+
+@inject IStringLocalizer<SharedResource> Localizer
+@inject CultureService CultureService
+
+
+<h1>
+    @Localizer["Welcome"]
+</h1>
+
+
+<div>
+
+    <button class="btn btn-primary">
+        @Localizer["Login"]
+    </button>
+
+
+    <button class="btn btn-danger">
+        @Localizer["Logout"]
+    </button>
+
+</div>
+
+
+<br />
+
+
+<label>
+    Select Language:
+</label>
+
+
+<select @onchange="ChangeLanguage">
+
+    <option value="en">
+        English
+    </option>
+
+    <option value="ta">
+        Tamil
+    </option>
+
+    <option value="hi">
+        Hindi
+    </option>
+
+</select>
+
+
+
+<p>
+    Current Language:
+    @currentCulture
+</p>
+
+
+
+@code {
+
+    private string currentCulture = "en";
+
+
+    private void ChangeLanguage(ChangeEventArgs args)
+    {
+        var culture = args.Value?.ToString();
+
+
+        if (!string.IsNullOrEmpty(culture))
+        {
+            CultureService.SetCulture(culture);
+
+            currentCulture = culture;
+
+            StateHasChanged();
+        }
+    }
+
+}
