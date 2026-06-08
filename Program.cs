@@ -22,6 +22,14 @@ builder.Services.AddScoped<IWeatherService, WeatherService>();
 //FormValidation
 builder.Services.AddScoped<IDataService,DataService>();
 
+
+builder.Services.AddScoped(sp =>
+    new HttpClient
+    {
+        BaseAddress =
+        new Uri("https://www.omdbapi.com/")
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
