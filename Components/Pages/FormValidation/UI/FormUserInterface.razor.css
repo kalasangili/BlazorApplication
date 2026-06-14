@@ -1,0 +1,88 @@
+﻿.form-base
+{
+}
+
+/* Scoped styles for FormUserInterface.razor */
+form {
+  max-width: 780px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #0f172a;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #0b4a6f;
+}
+
+input[type="text"], input[type="number"], select, textarea, input[type="file"] {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #f8fafc;
+  box-sizing: border-box;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* Grouping for skills block to keep spacing */
+input[type="checkbox"] + span, .skills-list {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+button[type="submit"], button[@type="submit"] {
+  background: linear-gradient(180deg, #0b74b9, #095e96);
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button[type="submit"]:hover {
+  filter: brightness(0.95);
+}
+
+button[role="button"], button {
+  border-radius: 6px;
+}
+
+/* Navigation button */
+button[onclick], button[@onclick], button:where([data-view-all]) {
+  margin-bottom: 12px;
+  background: transparent;
+  color: #0b74b9;
+  border: 1px solid #cfe9ff;
+  padding: 6px 10px;
+}
+
+/* Validation styles */
+.validation-message, .field-validation-error, .validation-summary-errors {
+  color: #b91c1c;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+/* Small helpers */
+br { display: block; content: ""; margin: 6px 0; }
+
+/* Make image previews (if any) look tidy */
+img[width] {
+  display: block;
+  margin-top: 8px;
+  border-radius: 4px;
+  max-width: 100%;
+  height: auto;
+}

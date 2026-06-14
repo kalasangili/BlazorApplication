@@ -17,7 +17,7 @@ builder.Services.AddSingleton<BlogService>();
 builder.Services.AddTransient<ITodoService, TodoService>();
 
 //Weather -(DI)
-builder.Services.AddScoped<IWeatherService, WeatherService>();
+builder.Services.AddSingleton<IWeatherService, WeatherService>();
 
 //FormValidation
 builder.Services.AddScoped<IDataService,DataService>();

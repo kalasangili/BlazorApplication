@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    <!-- Prevent SDK from generating assembly attributes when other sources provide them -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +15,13 @@
     <Content Remove="Components\Pages\LifeCycle\**" />
     <EmbeddedResource Remove="Components\Pages\LifeCycle\**" />
     <None Remove="Components\Pages\LifeCycle\**" />
+  </ItemGroup>
+
+  <!-- Exclude auto-generated files under any obj folder to avoid duplicate generated attributes from other projects' outputs -->
+  <ItemGroup>
+    <Compile Remove="**\obj\**\*.cs" />
+    <None Remove="**\obj\**\*" />
+    <EmbeddedResource Remove="**\obj\**\*" />
   </ItemGroup>
 
   <ItemGroup>

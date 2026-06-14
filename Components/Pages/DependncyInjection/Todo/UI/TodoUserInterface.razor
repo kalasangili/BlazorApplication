@@ -7,29 +7,29 @@
 @inject ITodoService _todoService
 @* @inject TodoNavService _navService *@
 
+<div class="todoDI">
 <h3>Todo App</h3>
 
 <label>TodoTask</label><br />
 <textarea @bind="task"></textarea><br />
 <button @onclick="AddTask">Submit</button>
 <div>
-	<p>Service ID: @_todoService.ServiceId</p>
 	<Table>
 		<tr>
 			<td>Task</td>
-			<td>Completion sts</td>
 			<td>delete</td>
 		</tr>
 		@foreach (var tasks in TaskList)
 		{
 			<tr>
 				<td> <span>@tasks.Content</span> </td>
-				<td><button>@tasks.IsComplete</button></td>
 				<td><button>Delete</button></td>
 			</tr>
 		}
 	</Table>
 	<button @onclick="Gonext">Next</button>
+</div>
+
 </div>
 @code {
 	private string task;

@@ -9,7 +9,7 @@
 
 <h3>Form</h3>
 <button @onclick="ViewAllPeople">All peoples</button>
-<EditForm Model="formData" OnValidSubmit="SubmitForm" FormName="UploadForm">
+<EditForm Model="formData" OnValidSubmit="SubmitForm" FormName="UploadForm" class="form-base">
 	<DataAnnotationsValidator />
 	
 	<label>FullName (Ex: JOHN A)</label>
@@ -33,7 +33,6 @@
 	<ValidationMessage For="@(()=>formData.City)"/>
 	<br /><br />
 
-	<label>Skills</label><br />
 	<label>Skills</label><br />
 
 	<input type="checkbox" @onchange='(e) => OnSkillChanged(e,"Frontend")' /> Frontend<br />
