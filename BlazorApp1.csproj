@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    <!-- Prevent duplicate assembly attributes when manual AssemblyInfo exists -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- Prevent generation of TargetFrameworkAttribute when another source provides it -->
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,9 +17,17 @@
     <EmbeddedResource Remove="Components\Pages\LifeCycle\**" />
     <None Remove="Components\Pages\LifeCycle\**" />
   </ItemGroup>
-
+  <!-- Exclude other projects' generated files (obj/bin) that may be present as subfolders -->
   <ItemGroup>
-    <ProjectReference Include="..\ReusableLibrary\ReusableLibrary.csproj" />
+    <Compile Remove="SharedComponent\**\obj\**\*.cs" />
+    <Compile Remove="**\obj\**\*.cs" />
+    <None Remove="SharedComponent\**\obj\**\*" />
+    <EmbeddedResource Remove="SharedComponent\**\obj\**\*" />
+  </ItemGroup>
+
+ 
+  <ItemGroup>
+    <Folder Include="Components\Pages\MovieAPI\Service\" />
   </ItemGroup>
 
 </Project>

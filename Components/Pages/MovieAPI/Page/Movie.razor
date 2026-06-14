@@ -1,0 +1,70 @@
+﻿@page "/movies"
+
+@using BlazorApp1.Components.Pages.MovieAPI.Model
+
+@inject HttpClient Http
+
+
+<h3>Movie Search</h3>
+
+
+<input @bind="searchText"
+       placeholder="Enter movie name" />
+
+
+<button @onclick="Search">
+    Search
+</button>
+
+
+
+@if (movies != null)
+{
+    foreach (var movie in movies)
+    {
+        <div>
+
+            <h4>
+                @movie.Title
+            </h4>
+
+            <p>
+                Year: @movie.Year
+            </p>
+
+
+            <img src="@movie.Poster"
+                 width="150" />
+
+        </div>
+    }
+}
+
+
+
+@code {
+
+    string searchText = "";
+
+    List<MovieDetail>? movies;
+
+
+    async Task Search()
+    {
+
+        string apiKey = "8a431740";
+
+
+        var url =
+        $"?apikey={apiKey}&s={searchText}";
+
+
+        var result =
+        await Http.GetFromJsonAsync<MovieResponse>(url);
+
+
+        movies = result?.Search;
+
+    }
+
+}
