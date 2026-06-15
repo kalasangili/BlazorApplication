@@ -7,13 +7,11 @@
 @inject ITodoService _todoService
 
 <h3>navigation</h3>
-<p>Service ID: @_todoService.ServiceId</p>
 
 <div>
 	<Table>
 		<tr>
 			<td>Task</td>
-			<td>Completion sts</td>
 			<td>delete</td>
 		</tr>
 
@@ -21,7 +19,6 @@
 		{
 			<tr>
 				<td> <span>@tasks.Content</span> </td>
-				<td><button>@tasks.IsComplete</button></td>
 				<td><button>Delete</button></td>
 			</tr>
 		}
@@ -29,6 +26,4 @@
 </div>
 @code {
 	private string task;
-
-	
 }

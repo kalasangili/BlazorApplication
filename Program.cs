@@ -17,11 +17,19 @@ builder.Services.AddSingleton<BlogService>();
 builder.Services.AddTransient<ITodoService, TodoService>();
 
 //Weather -(DI)
-builder.Services.AddScoped<IWeatherService, WeatherService>();
+builder.Services.AddSingleton<IWeatherService, WeatherService>();
 
 //FormValidation
 builder.Services.AddScoped<IDataService,DataService>();
 
+
+// Api
+builder.Services.AddScoped(sp =>
+   new HttpClient
+   {
+       BaseAddress =
+       new Uri("https://www.omdbapi.com/")
+   });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +38,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
     app.UseHsts();
 }
+
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
 
