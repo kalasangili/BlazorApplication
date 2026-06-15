@@ -1,0 +1,19 @@
+﻿<div style="@ChangeColor;@Theme;border:1px solid gray;width:500px;height:500px">
+    <p>
+        Build a Theme Switcher app where the theme is controlled from a parent
+        component and applied to all child components.
+    </p>
+    
+
+</div>
+
+
+
+@code {
+
+    [CascadingParameter(Name ="color")]
+    public string ChangeColor { get; set; }
+
+    [CascadingParameter(Name ="bgcolor")]
+    public string Theme { get; set; }
+}

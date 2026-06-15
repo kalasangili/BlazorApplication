@@ -1,0 +1,24 @@
+﻿
+
+<h3>Counter</h3>
+
+<button @onclick="IncreaseValue">Increase</button>
+
+<p>@currentCount</p>
+
+@code {
+
+    int currentCount = 0;
+
+
+    private void IncreaseValue()
+    {
+            currentCount++;
+
+            if (currentCount>5)
+            {
+                throw new Exception();
+            }
+
+    }
+}

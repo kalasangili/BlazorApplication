@@ -34,10 +34,11 @@ namespace BlazorApp1.Components.Pages.FormValidation.Model
 		[EmailAddress]
 		public string? Email { get; set; }
 
-		[Required]
+      [Required]
+		// store uploaded files as data URLs (base64) so they can be rendered in <img> or <iframe>
 		public string? UploadResume { get; set; }
 
-		[Required]
+      [Required]
 		public string? UploadSign { get; set; }
 
 	}

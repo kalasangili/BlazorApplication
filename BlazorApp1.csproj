@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    <!-- Prevent duplicate assembly attributes when manual AssemblyInfo exists -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- Prevent generation of TargetFrameworkAttribute when another source provides it -->
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,9 +17,24 @@
     <EmbeddedResource Remove="Components\Pages\LifeCycle\**" />
     <None Remove="Components\Pages\LifeCycle\**" />
   </ItemGroup>
+  <!-- Exclude other projects' generated files (obj/bin) that may be present as subfolders -->
+  <ItemGroup>
+    <Compile Remove="SharedComponent\**\obj\**\*.cs" />
+    <Compile Remove="**\obj\**\*.cs" />
+    <None Remove="SharedComponent\**\obj\**\*" />
+    <EmbeddedResource Remove="SharedComponent\**\obj\**\*" />
+  </ItemGroup>
+
+  <!-- Exclude auto-generated files under any obj folder to avoid duplicate generated attributes from other projects' outputs -->
+  <ItemGroup>
+    <Compile Remove="**\obj\**\*.cs" />
+    <None Remove="**\obj\**\*" />
+    <EmbeddedResource Remove="**\obj\**\*" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blazor - Copy\BlazorEducation\RazorClassLibrary1\RazorClassLibrary1.csproj" />
+    <Folder Include="Components\Pages\StateManagement\Service\" />
   </ItemGroup>
 
 </Project>
