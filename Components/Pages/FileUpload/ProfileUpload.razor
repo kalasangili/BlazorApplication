@@ -1,16 +1,18 @@
 ﻿@page "/Profile"
 @layout EmptyLayout
 
+<div class="profile">
 <h3>ProfileUpload</h3>
 
 @if (!string.IsNullOrEmpty(path))
 {
-    <img src="@path" style="width:175px; height:175px;" />
+    <img src="@path" />
 
 }
 <br /><br />
-<InputFile OnChange="UpdateProfile" accept=".jpg,.png"></InputFile>
+<InputFile OnChange="UpdateProfile" accept=".jpg,.png" ></InputFile>
 
+</div>
 
 @code {
 
