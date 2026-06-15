@@ -1,0 +1,13 @@
+﻿ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    /*    grid-template-rows: repeat(auto-fill, minmax(220px, 1fr));*/
+    gap: 20px;
+}
+
+li {
+    list-style: none;
+    text-align: center;
+    border: 1px solid #ccc; /* optional: box around each product */
+    padding: 10px;
+}

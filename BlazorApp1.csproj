@@ -30,4 +30,15 @@
     <Folder Include="Components\Pages\MovieAPI\Service\" />
   </ItemGroup>
 
+  <!-- Exclude auto-generated files under any obj folder to avoid duplicate generated attributes from other projects' outputs -->
+  <ItemGroup>
+    <Compile Remove="**\obj\**\*.cs" />
+    <None Remove="**\obj\**\*" />
+    <EmbeddedResource Remove="**\obj\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\Pages\StateManagement\Service\" />
+  </ItemGroup>
+
 </Project>
